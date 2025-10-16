@@ -38,7 +38,7 @@ class ManufacturerListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(ManufacturerListView, self).get_context_data(**kwargs)
+        context = super(ManufacturerListView, self).get_context_data(object_list=object_list, **kwargs)
         name = self.request.GET.get("name")
         context["search_form"] = ManufacturerSearchForm(
             initial={"name": name}
@@ -76,7 +76,7 @@ class CarListView(LoginRequiredMixin, generic.ListView):
     queryset = Car.objects.select_related("manufacturer")
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(CarListView, self).get_context_data(**kwargs)
+        context = super(CarListView, self).get_context_data(object_list=object_list, **kwargs)
         model = self.request.GET.get("model")
         context["search_form"] = CarSearchForm(
             initial={"model": model}
@@ -116,7 +116,7 @@ class DriverListView(LoginRequiredMixin, generic.ListView):
     paginate_by = 5
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(DriverListView, self).get_context_data(**kwargs)
+        context = super(DriverListView, self).get_context_data(object_list=object_list, **kwargs)
         username = self.request.GET.get("username")
         context["search_form"] = DriverSearchForm(
             initial={"username": username}
